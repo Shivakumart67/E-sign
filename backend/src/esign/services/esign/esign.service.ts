@@ -7,12 +7,9 @@ const path = require("path");
 @Injectable()
 export class EsignService {
   private readonly accessToken =
-    "1000.2c494b3c32647f903645cd270082e20b.ccfcb009b33767efd757254a61bf6330";
+    "1000.06888ed286be74fa4cd323253a3813f1.aa03cc42ddde566787d0b8f67441af3f";
 
-  private async storeCompletionCertificate(
-    requestId: string,
-    fileName: string
-  ) {
+  async storeCompletionCertificate(requestId: string, fileName: string) {
     try {
       const headers = {
         Authorization: "Zoho-oauthtoken " + this.accessToken,
@@ -50,7 +47,7 @@ export class EsignService {
       throw error;
     }
   }
-  private async storeCompletedDocument(
+  async storeCompletedDocument(
     requestId: string,
     documentId: string,
     fileName: string
@@ -93,29 +90,6 @@ export class EsignService {
     }
   }
 
-  async downloadCompletedDocument(
-    requestId: string,
-    documentId: string,
-    fileName: string
-  ) {
-    if (requestId && fileName) {
-      const completionCertificate = await this.storeCompletionCertificate(
-        requestId,
-        fileName
-      );
-      const signedDocument = await this.storeCompletedDocument(
-        requestId,
-        documentId,
-        fileName
-      );
-
-      return {
-        completionCertificate,
-        signedDocument,
-      };
-    }
-  }
-
   async initiateEsignFromZoho(requestId: string, requestData: DocumentType) {
     try {
       const actionsJson = {
@@ -138,10 +112,11 @@ export class EsignService {
             field_category: "Signature",
             abs_width: "200",
             abs_height: "50",
-            is_mandatory: true,
-            x_coord: "100",
-            y_coord: "100",
+            is_mandatory: false,
+            x_coord: "450",
+            y_coord: "950",
             page_no: 0,
+            is_read_only: false
           },
         ],
       };

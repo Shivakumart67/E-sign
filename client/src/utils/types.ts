@@ -59,7 +59,9 @@ export interface DocumentType {
   zsdocumentid: string;
   request_type_id: string;
   owner_last_name: string;
-  loadingDownload?: boolean
+  loadingDownloadCertificate?: boolean
+  loadingDownloadDocument?: boolean
   actions: Action[];
   loading?: boolean;
 }
+

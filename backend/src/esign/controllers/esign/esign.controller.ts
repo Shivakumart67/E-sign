@@ -99,14 +99,26 @@ export class EsignController {
   }
 
   @Get("getCompletedDocument/:requestId/:fileName/:documentId")
-  async getCompletedDoumentFromZoho(
+  async getCompletedDoument(
     @Param("requestId") requestId: string,
     @Param("fileName") fileName: string,
     @Param("documentId") documentId: string
   ) {
-    const data = await this.zohoSignService.downloadCompletedDocument(
+    const data = await this.zohoSignService.storeCompletedDocument(
       requestId,
       documentId,
+      fileName
+    );
+    return data;
+  }
+
+  @Get("getCompletedCertificate/:requestId/:fileName/")
+  async getCompletedCertificate(
+    @Param("requestId") requestId: string,
+    @Param("fileName") fileName: string
+  ) {
+    const data = await this.zohoSignService.storeCompletionCertificate(
+      requestId,
       fileName
     );
     return data;
