@@ -3,9 +3,11 @@ import UploadFile from "./components/uploadFile";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ShowPreview from "./components/ShowPreview";
+import HomePage from "./components/home";
+import UploadAndPreview from "./components/uploadAndPreview";
 
 axios.defaults.baseURL =
-  "https://3001-shivakumart67-esign-621lp9num0o.ws-us114.gitpod.io";
+  "https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io";
 
 function App() {
   const [uploadedFile, setUploadedFile] = useState<{
@@ -21,7 +23,7 @@ function App() {
 
       try {
         const response = await axios.post(
-          "https://3001-shivakumart67-esign-621lp9num0o.ws-us114.gitpod.io/esign/upload",
+          "https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io/esign/upload",
           formData,
           {
             headers: {
@@ -47,13 +49,11 @@ function App() {
           <Route
             path="/"
             element={
-              <UploadFile handleUpload={handleUpload} fileData={uploadedFile} />
+              <HomePage />
+              // <UploadFile handleUpload={handleUpload} fileData={uploadedFile} />
             }
           />
-          <Route
-            path="/preview"
-            element={<ShowPreview fileData={uploadedFile} />}
-          />
+          <Route path="/uploadDocument" element={<UploadAndPreview />} />
         </Routes>
       </Router>
     </>

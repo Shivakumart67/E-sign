@@ -19,15 +19,16 @@ const ShowPreview: React.FC<IPreview> = ({ fileData }) => {
 
   const sign = async () => {
     await axios.post(
-      "https://3001-shivakumart67-esign-621lp9num0o.ws-us114.gitpod.io/esign/zogoSign"
+      "https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io/esign/zogoSign"
     );
+    alert("File Uploaded to Zoho");
   };
 
   return (
     <div>
       <h3>Preview</h3>
       <embed
-        src={`https://3001-shivakumart67-esign-621lp9num0o.ws-us114.gitpod.io/uploads/file-1718795732703-736413857.pdf`}
+        src={`https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io/uploads/file-1718854760284-544977528.pdf`}
         type="application/pdf"
         style={embedStyle}
         title="Preview"
