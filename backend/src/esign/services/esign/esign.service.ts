@@ -6,10 +6,10 @@ const path = require("path");
 import {
   accessToken,
   completedDocumentsDirectory,
-  exportFilePath,
+  uploadFilePath,
   recipientEmail,
   recipientName,
-} from "../../../../../constants";
+} from "../../../utils/constants";
 
 @Injectable()
 export class EsignService {
@@ -164,7 +164,7 @@ export class EsignService {
 
   async requestDocumentToZoho(fileName: string): Promise<DocumentType> {
     try {
-      const filePath = exportFilePath + fileName;
+      const filePath = uploadFilePath + fileName;
 
       const actionJson = {
         recipient_name: recipientName,

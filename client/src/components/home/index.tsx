@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import DrawIcon from "@mui/icons-material/Draw";
 import { ArrowBack, Refresh, RemoveRedEye } from "@mui/icons-material";
 import DocumentPreview from "../DocumentPreview";
-import { baseUrl } from "../../../../constants";
+import { baseUrl } from "../../utils/constants";
 
 function HomePage() {
   const [documents, setDocuments] = React.useState<DocumentType[]>([]);

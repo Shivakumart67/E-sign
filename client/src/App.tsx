@@ -2,9 +2,9 @@ import axios from "axios";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./components/home";
 import UploadAndPreview from "./components/uploadAndPreview";
+import { baseUrl } from "./utils/constants";
 
-axios.defaults.baseURL =
-  "https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io";
+axios.defaults.baseURL = baseUrl;
 
 function App() {
   return (

@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { ArrowBack } from "@mui/icons-material";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl } from "../../../../constants";
+import { baseUrl } from "../../utils/constants";
 
 function UploadAndPreview() {
   const [isPreview, setIsPreview] = React.useState(false);
