@@ -18,3 +18,4 @@ This project implements a simple eSign workflow application using NestJS. It all
 
 - **E-Mail:** shivakumart67@gmail.com
 
+![Example Image](client/public/image1.png)
