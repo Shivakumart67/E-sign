@@ -9,7 +9,8 @@ import {
   uploadFilePath,
   recipientEmail,
   recipientName,
-} from "../../../utils/constants";
+  completionCertificateDirectory,
+} from "../../utils/constants";
 
 @Injectable()
 export class EsignService {
@@ -27,7 +28,7 @@ export class EsignService {
       if (!response || response.status !== 200) {
         throw new Error("Failed to download the completed document");
       }
-      const outputDir = completedDocumentsDirectory;
+      const outputDir = completionCertificateDirectory;
 
       const filePath = path.join(outputDir, `${fileName}`);
 
@@ -115,8 +116,8 @@ export class EsignService {
             abs_width: "200",
             abs_height: "50",
             is_mandatory: false,
-            x_coord: "450",
-            y_coord: "950",
+            x_coord: "400",
+            y_coord: "600",
             page_no: 0,
             is_read_only: false,
           },

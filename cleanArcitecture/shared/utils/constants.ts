@@ -2,7 +2,7 @@ export const baseUrl =
   "https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io";
 
 export const accessToken =
-  "1000.e3da08d2cdeb983bc66a024bbf7ab496.f876a0bc5af5fe6d481c85ca3f43a7ed";
+  "1000.778f6f571c605c5827e0ece3d10555cf.2726321e1a850217253e053839801626";
 
 export const completionCertificateDirectory =
   "/workspace/E-sign/backend/downloads/completionCertificate";

@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { EsignController } from './controllers/esign/esign.controller';
-import { EsignService } from './services/esign/esign.service';
+import { Module } from "@nestjs/common";
+import { EsignController } from "./controllers/esign.controller";
+import { EsignService } from "./services/esign.service";
 
 @Module({
   controllers: [EsignController],

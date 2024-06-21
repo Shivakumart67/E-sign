@@ -13,11 +13,24 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { extname } from "path";
 import { Express } from "express";
-import { EsignService } from "src/esign/services/esign/esign.service";
+import { EsignService } from "../../../domain/services/esign.service";
+import { InitiateEsignUseCase } from "../../../usecases/esign/initiate-esign.usecase";
+import { RequestEsignUseCase } from "../../../usecases/esign/request-esign.usecase";
+import { StoreCompletedDocumentUseCase } from "../../../usecases/esign/store-completed-document.usecase";
+import { StoreCompletionCertificateUseCase } from "../../../usecases/esign/store-completion-certificate.usecase";
+import { GetDocumentsUseCase } from "../../../usecases/esign/get-documents.usecase";
+import { DocumentType } from "src/domain/entities/esign.entity";
 
 @Controller("esign")
 export class EsignController {
-  constructor(private zohoSignService: EsignService) {}
+  constructor(
+    private readonly getDocumentsUseCase: GetDocumentsUseCase,
+    private readonly requestEsignUseCase: RequestEsignUseCase,
+    private readonly initiateEsignUseCase: InitiateEsignUseCase,
+    private readonly storeCompletedDocumentUseCase: StoreCompletedDocumentUseCase,
+    private readonly storeCompletionCertificateUseCase: StoreCompletionCertificateUseCase,
+    private readonly esignService: EsignService
+  ) {}
 
   @Post("upload")
   @UseInterceptors(
@@ -31,7 +44,6 @@ export class EsignController {
             .slice(0, -1)
             .join(".");
           const ext = extname(file.originalname);
-
           callback(null, `${originalName}_${timestamp}${ext}`);
         },
       }),
@@ -59,8 +71,7 @@ export class EsignController {
 
   @Get("getDocuments")
   async getZohoDocuments() {
-    const data = await this.zohoSignService.getDocumentsFromZoho();
-    return data;
+    return await this.getDocumentsUseCase.execute();
   }
 
   @Post("requestToEsign")
@@ -68,7 +79,7 @@ export class EsignController {
     if (!fileName.fileName) {
       return { message: "invalid file" };
     }
-    return await this.zohoSignService.requestDocumentToZoho(fileName.fileName);
+    return await this.requestEsignUseCase.execute(fileName.fileName);
   }
 
   @Post("initiateEsign")
@@ -78,7 +89,7 @@ export class EsignController {
     if (!data.requestId) {
       return { message: "invalid request" };
     }
-    return await this.zohoSignService.initiateEsignFromZoho(
+    return await this.initiateEsignUseCase.execute(
       data.requestId,
       data.requestData
     );
@@ -90,12 +101,11 @@ export class EsignController {
     @Param("fileName") fileName: string,
     @Param("documentId") documentId: string
   ) {
-    const data = await this.zohoSignService.storeCompletedDocument(
+    return await this.storeCompletedDocumentUseCase.execute(
       requestId,
       documentId,
       fileName
     );
-    return data;
   }
 
   @Get("getCompletedCertificate/:requestId/:fileName/")
@@ -103,10 +113,9 @@ export class EsignController {
     @Param("requestId") requestId: string,
     @Param("fileName") fileName: string
   ) {
-    const data = await this.zohoSignService.storeCompletionCertificate(
+    return await this.storeCompletionCertificateUseCase.execute(
       requestId,
       fileName
     );
-    return data;
   }
 }
