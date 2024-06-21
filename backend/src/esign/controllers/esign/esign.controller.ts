@@ -18,6 +18,7 @@ import { EsignService } from "src/esign/services/esign/esign.service";
 @Controller("esign")
 export class EsignController {
   constructor(private zohoSignService: EsignService) {}
+
   @Post("upload")
   @UseInterceptors(
     FileInterceptor("file", {
@@ -56,22 +57,10 @@ export class EsignController {
     }
   }
 
-  @Get()
-  getData() {
-    return {
-      message: "success",
-    };
-  }
-
   @Get("getDocuments")
   async getZohoDocuments() {
     const data = await this.zohoSignService.getDocumentsFromZoho();
     return data;
-  }
-
-  @Post("zogoSign")
-  async createAndSubmitDocument(): Promise<any> {
-    return await this.zohoSignService.createAndSubmitDocument();
   }
 
   @Post("requestToEsign")
@@ -79,9 +68,6 @@ export class EsignController {
     if (!fileName.fileName) {
       return { message: "invalid file" };
     }
-    console.log("lkasdjflkajsk");
-    console.log(fileName.fileName);
-    console.log("lkasdjflkajsk");
     return await this.zohoSignService.requestDocumentToZoho(fileName.fileName);
   }
 

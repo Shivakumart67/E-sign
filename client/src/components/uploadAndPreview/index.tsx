@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import { ArrowBack } from "@mui/icons-material";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { baseUrl } from "../../../../constants";
 
 function UploadAndPreview() {
   const [isPreview, setIsPreview] = React.useState(false);
@@ -34,12 +35,10 @@ function UploadAndPreview() {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("Upload response:", response.data);
         isLoading(false);
         setFileData(response.data);
         setIsPreview(true);
       } catch (error) {
-        console.error("Upload error:", error);
         alert("Failed to upload the file.");
         isLoading(false);
       }
@@ -195,7 +194,7 @@ function PreviewFile({ file, setIsPreview, fileData }: IPreviewProps) {
           {fileData?.filePath ? (
             <div style={{ textAlign: "center" }} className="mt-3">
               <embed
-                src={`https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io/${fileData?.filePath}`}
+                src={`${baseUrl}/${fileData?.filePath}`}
                 type="application/pdf"
                 style={embedStyle}
                 title="Preview"

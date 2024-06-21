@@ -1,7 +1,5 @@
-import { ArrowBack } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
 
 interface DocumentPreviewProps {
   fileUrl: string;
@@ -33,7 +31,7 @@ function DocumentPreview({ fileUrl }: DocumentPreviewProps) {
             </div>
           ) : (
             <Typography variant="h5" gutterBottom>
-              Previewing:
+              Previewing...
             </Typography>
           )}
         </div>

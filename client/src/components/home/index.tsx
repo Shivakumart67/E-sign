@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import DrawIcon from "@mui/icons-material/Draw";
 import { ArrowBack, Refresh, RemoveRedEye } from "@mui/icons-material";
 import DocumentPreview from "../DocumentPreview";
+import { baseUrl } from "../../../../constants";
 
 function HomePage() {
   const [documents, setDocuments] = React.useState<DocumentType[]>([]);
@@ -42,9 +43,7 @@ function HomePage() {
       const data = await axios.get(
         `esign/getCompletedDocument/${request_id}/${request.document_ids?.[0].document_name}.pdf/${request.document_ids?.[0].document_id}`
       );
-      setFileUrl(
-        `https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io${data.data}`
-      );
+      setFileUrl(`${baseUrl}${data.data}`);
       const updatedDocumentsAfter = documents.map((doc, i) =>
         i === index ? { ...doc, loadingDownloadDocument: false } : doc
       );
@@ -67,9 +66,7 @@ function HomePage() {
       const data = await axios.get(
         `esign/getCompletedCertificate/${request_id}/${request.document_ids?.[0].document_name}.pdf`
       );
-      setFileUrl(
-        `https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io${data.data}`
-      );
+      setFileUrl(`${baseUrl}${data.data}`);
       const updatedDocumentsAfter = documents.map((doc, i) =>
         i === index ? { ...doc, loadingDownloadCertificate: false } : doc
       );
@@ -304,7 +301,7 @@ function HomePage() {
                               size="small"
                               onClick={() => {
                                 setFileUrl(
-                                  `https://3001-shivakumart67-esign-mk0l9wz0e2c.ws-us114.gitpod.io/uploads/${row.document_ids?.[0]?.document_name}.pdf`
+                                  `${baseUrl}/uploads/${row.document_ids?.[0]?.document_name}.pdf`
                                 );
                               }}
                             >
