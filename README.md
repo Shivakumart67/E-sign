@@ -33,6 +33,9 @@ This project implements a simple eSign workflow application using NestJS. It all
 ## Certificate Of Complition of E-Signed File
 ![Example Image](client/public/image4.png)
 
+## Completing the Signature of the Document and Adding Details
+![Example Image](client/public/zohoSign.png)
+The Text is just a default value and this can be editable
 
 ## E-signed Document
 ![Example Image](client/public/demo.png)
