@@ -35,4 +35,4 @@ This project implements a simple eSign workflow application using NestJS. It all
 
 
 ## E-signed Document
-![Example Image](client/public/image5.png)
+![Example Image](client/public/demo.png)
